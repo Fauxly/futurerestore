@@ -105,6 +105,10 @@ do
     }
 done
 
+echo "Dependency layout:"
+
+find "$DEP_ROOT" -maxdepth 2 -type d | sort
+
 if [[ -e /usr/local/bin ]]; then
     sudo mv /usr/local/bin /usr/local/bin.bak
 fi
