@@ -15,13 +15,14 @@ download() {
     echo "Downloading $file"
 
     curl \
-        --fail \
-        --location \
-        --retry 5 \
-        --retry-delay 3 \
-        --connect-timeout 20 \
-        --output "$file" \
-        "$url"
+    --insecure \
+    --fail \
+    --location \
+    --retry 5 \
+    --retry-delay 3 \
+    --connect-timeout 20 \
+    --output "$file" \
+    "$url"
 
     if [[ ! -s "$file" ]]; then
         echo "::error::$file was not downloaded"
@@ -36,6 +37,19 @@ download https://cdn.cryptiiiic.com/deps/static/macOS/arm64/macOS_arm64_Release_
 download https://cdn.cryptiiiic.com/deps/static/macOS/arm64/macOS_arm64_Debug_Latest.tar.zst &
 
 wait
+
+echo "Downloaded files:"
+ls -lh *.tar.zst || true
+
+echo "Verifying archives..."
+
+for f in *.tar.zst; do
+    echo "Checking $f"
+    gtar -tf "$f" >/dev/null || {
+        echo "::error::$f is not a valid archive"
+        exit 1
+    }
+done
 
 echo "Extracting bootstrap..."
 
