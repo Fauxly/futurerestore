@@ -6,6 +6,12 @@ export DEP_ROOT=/Users/runner/work/futurerestore/futurerestore/dep_root
 export BASE=/Users/runner/work/futurerestore/futurerestore/
 
 cd /Users/runner/work/futurerestore/futurerestore/
+
+if [[ ! -d "${DEP_ROOT}/macOS_x86_64_Release/include" ]]; then
+    echo "::error::Dependency archive was not extracted."
+    exit 1
+fi
+
 ln -sf ${DEP_ROOT}/macOS_x86_64_Release/{lib/,include/} ${DEP_ROOT}/
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=$(which make) -DCMAKE_C_COMPILER=$(which clang) -DCMAKE_CXX_COMPILER=$(which clang++) -DCMAKE_MESSAGE_LOG_LEVEL="WARNING" -G "CodeBlocks - Unix Makefiles" -S ./ -B cmake-build-release-x86_64 -DARCH=x86_64 -DNO_PKGCFG=ON
 make -j4 -l4 -C cmake-build-release-x86_64
