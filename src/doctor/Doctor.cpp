@@ -2,7 +2,9 @@
 
 #include <iostream>
 
-Doctor::Doctor() {}
+Doctor::Doctor()
+{
+}
 
 int Doctor::run()
 {

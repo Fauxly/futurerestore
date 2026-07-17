@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.19...3.24 FATAL_ERROR)
 project(futurerestore VERSION 2.0.0 LANGUAGES C CXX)
 add_executable(futurerestore
         main.cpp
-        futurerestore.cpp)
+        futurerestore.cpp
+        doctor/Doctor.cpp)
 target_include_directories(futurerestore PRIVATE
         "${CMAKE_SOURCE_DIR}/external/idevicerestore/src"
         "${CMAKE_SOURCE_DIR}/external/tsschecker/external/jssy/jssy"

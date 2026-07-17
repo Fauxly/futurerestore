@@ -1,6 +1,7 @@
 #pragma once
 
-class Doctor {
+class Doctor
+{
 public:
     Doctor();
 
