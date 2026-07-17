@@ -8,6 +8,7 @@
 
 #include <getopt.h>
 #include "futurerestore.hpp"
+#include "doctor/Doctor.hpp"
 
 extern "C"{
 #include "tsschecker.h"
@@ -186,7 +187,13 @@ int main_r(int argc, const char * argv[]) {
         cmd_help();
         return -1;
     }
-
+   
+    if (argc == 2 && strcmp(argv[1], "doctor") == 0)
+{
+    Doctor doctor;
+    return doctor.run();
+}
+    
     while ((opt = getopt_long(argc, (char* const *)argv, "ht:b:p:s:m:c:g:ikwude0z123456789afj", longopts, &optindex)) > 0) {
         switch (opt) {
             case 'h': // long option: "help"; can be called as short option
